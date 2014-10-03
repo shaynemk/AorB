@@ -18,7 +18,7 @@ android {
         def version_Build = versionProps['VERSION_BUILD'].toInteger() + 1;
         def version_Minor = versionProps['VERSION_MINOR'].toInteger() + minorCount;
         def version_Major = versionProps['VERSION_MAJOR'].toInteger();
-        def version_Name = version_Major.toString() + "." + version_Minor.toString() + "." + version_Build.toString()
+        def version_Name = version_Major.toString() + "." + version_Minor.toString() + "-" + version_Build.toString()
 
         versionProps['VERSION_BUILD']=version_Build.toString()
         versionProps['VERSION_MINOR']=version_Minor.toString()
