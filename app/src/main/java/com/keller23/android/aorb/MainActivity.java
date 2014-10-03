@@ -17,8 +17,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final CheckBox checkBoxC;
-        final EditText editTextA, editTextB, editTextC;
+        final CheckBox checkBoxC, checkBoxD;
+        final EditText editTextA, editTextB, editTextC, editTextD;
 
         editTextA = (EditText) findViewById(R.id.editText_optionA);
         editTextA.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
                 if (editTextA.getText().toString().contentEquals(getString(R.string.editText_blank))) editTextA.setText("");
             }
         });
+
         editTextB = (EditText) findViewById(R.id.editText_optionB);
         editTextB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,17 +35,28 @@ public class MainActivity extends Activity {
                 if (editTextB.getText().toString().contentEquals(getString(R.string.editText_blank))) editTextB.setText("");
             }
         });
+
         checkBoxC = (CheckBox) findViewById(R.id.checkBox_optionC);
         editTextC = (EditText) findViewById(R.id.editText_optionC);
         if (checkBoxC.isChecked()) editTextC.setEnabled(true);
-        else /*if (!checkBoxC.isChecked())*/ editTextC.setEnabled(false);
+        else editTextC.setEnabled(false);
         editTextC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (editTextC.getText().toString().contentEquals(getString(R.string.editText_blank))) editTextC.setText("");
             }
         });
-        // TODO Add EditTextD blanking and enabling/disabling.
+
+        checkBoxD = (CheckBox) findViewById(R.id.checkBox_optionD);
+        editTextD = (EditText) findViewById(R.id.editText_optionD);
+        if (checkBoxD.isChecked()) editTextC.setEnabled(true);
+        else editTextD.setEnabled(false);
+        editTextD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editTextD.getText().toString().contentEquals(getString(R.string.editText_blank))) editTextD.setText("");
+            }
+        });
     }
 
 
@@ -77,16 +89,22 @@ public class MainActivity extends Activity {
 
             // TODO Dynamically add however many options we have to default/blank notification checker.
             // TODO Add in the case to deny generation when an option field is enabled, but blank.
-            if (a.getText().toString().contentEquals(getString(R.string.editText_blank)) || a.getText().toString().isEmpty() ||
-                b.getText().toString().contentEquals(getString(R.string.editText_blank)) || b.getText().toString().isEmpty()) {
-                if(c.isEnabled() && (c.getText().toString().isEmpty() || c.getText().toString().contentEquals(getString(R.string.editText_blank)))) Toast.makeText(getApplicationContext(),"Please enter Option C",Toast.LENGTH_SHORT).show();
-                if(d.isEnabled() && (d.getText().toString().isEmpty()|| d.getText().toString().contentEquals(getString(R.string.editText_blank)))) Toast.makeText(getApplicationContext(),"Please enter Option D",Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(),R.string.toast_optionError,Toast.LENGTH_SHORT).show();
-            }
-
+            if (a.getText().toString().contentEquals(getString(R.string.editText_blank)) || a.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option A",Toast.LENGTH_SHORT).show();
+            else if (b.getText().toString().contentEquals(getString(R.string.editText_blank)) || b.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option B",Toast.LENGTH_SHORT).show();
+            else if (c.isEnabled() && (c.getText().toString().isEmpty() || c.getText().toString().contentEquals(getString(R.string.editText_blank)))) Toast.makeText(getApplicationContext(),"Please enter Option C",Toast.LENGTH_SHORT).show();
+            else if (d.isEnabled() && (d.getText().toString().isEmpty() || d.getText().toString().contentEquals(getString(R.string.editText_blank)))) Toast.makeText(getApplicationContext(),"Please enter Option D",Toast.LENGTH_SHORT).show();
+            //else Toast.makeText(getApplicationContext(),R.string.toast_error + "in default/empty check",Toast.LENGTH_SHORT).show();
 
             String result;
-            int i = gen.choose(2); // TODO Change static number generation to dynamic generation based on how many options are selected by user.
+            int x = 2;
+            final CheckBox checkC, checkD;
+            checkC = (CheckBox) findViewById(R.id.checkBox_optionC);
+            checkD = (CheckBox) findViewById(R.id.checkBox_optionD);
+            if (checkC.isChecked()) {
+                x += 1;
+                if (checkD.isChecked()) x += 1;
+            }
+            int i = gen.choose(x);
             switch (i) {
                 case 1:
                     result =  a.getText().toString();
@@ -105,7 +123,7 @@ public class MainActivity extends Activity {
                     result = R.string.toast_error + " in SWITCH";
             }
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-            result = null; // TODO Figure out if result = null is even necessary, let alone helpful.
+            //result = null; // TODO Figure out if result = null is even necessary, let alone helpful.
             return true;
         }
         return super.onOptionsItemSelected(item);
