@@ -17,12 +17,16 @@ import java.util.Properties;
 
 
 public class MainActivity extends Activity {
+    // TODO Add GAnalytics [https://support.google.com/googleplay/android-developer/answer/3389759]
+    // TODO
 
     private Context context;
     private PropertiesHelper versionProps;
     private Properties props;
-    private PackageInfo pInfo;
+    private PackageInfo appInfo;
     private String versionName = "emptyVersion";
+    private boolean debugMode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +36,15 @@ public class MainActivity extends Activity {
         versionProps = new PropertiesHelper(context);
         versionProps.getProps("version.properties");
         try {
-            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            appInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        versionName = pInfo.versionName.toString();
+        versionName = appInfo.versionName.toString();
+        //if (ApplicationInfo.FLAG_DEBUGGABLE) ; // TODO figure this debugging flag out?
+
         final CheckBox checkBoxC, checkBoxD;
         final EditText editTextA, editTextB, editTextC, editTextD;
-
         editTextA = (EditText) findViewById(R.id.editText_optionA);
         editTextA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,21 +117,23 @@ public class MainActivity extends Activity {
             return true;
         }
         else if (id == R.id.action_version) { // TODO modify the version Toast to include the current version number. Then, modify it to bring up a custom 'About' toast/page.
-            Toast.makeText(getApplicationContext(),"A or B, v"+versionName,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"A or B, v"+versionName,Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.action_generate) {
         // FIXME Fix the case where generation runs twice.
 
             OptionPicker gen = new OptionPicker();
-            final EditText a = (EditText) findViewById(R.id.editText_optionA),
+            EditText a = (EditText) findViewById(R.id.editText_optionA),
                            b = (EditText) findViewById(R.id.editText_optionB),
                            c = (EditText) findViewById(R.id.editText_optionC),
                            d = (EditText) findViewById(R.id.editText_optionD);
-            final CheckBox checkC = (CheckBox) findViewById(R.id.checkBox_optionC),
+            CheckBox checkC = (CheckBox) findViewById(R.id.checkBox_optionC),
                            checkD = (CheckBox) findViewById(R.id.checkBox_optionD);
             String result;
             int x = 2;
             //long resultSleep = 5 * 1000;
+
+
 
             // TODO Dynamically add however many options we have to default/blank notification checker.
             // FIXME Keep option d from running If c isn't enabled.
@@ -152,28 +159,31 @@ public class MainActivity extends Activity {
                 switch (gen.choose(x)) {
                     case 1:
                         result = a.getText().toString();
-                        a.selectAll();
+                        a.selectAll(); // FIXME EditText selection doesn't appear to be working anymore?
                         //Thread.sleep(resultSleep); // FIXME Select answer, sleep/delay, then deselect and continue?
-                        //Toast.makeText(getApplicationContext(), result + " is the result, duh. Obviously Testing...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Case 1", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
                         result = b.getText().toString();
                         b.selectAll();
+                        Toast.makeText(getApplicationContext(), "Case 2", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
                         result = c.getText().toString();
                         c.selectAll();
+                        Toast.makeText(getApplicationContext(), "Case 3", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
                         result = d.getText().toString();
                         d.selectAll();
+                        Toast.makeText(getApplicationContext(), "Case 4", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         result = R.string.toast_error + " in SWITCH";
                 }
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                 //result = null; // TODO Figure out if result = null is even necessary, let alone helpful.
-                //return true; // TODO  Does this ake more sense (with below as false) or leave the true return below?
+                //return true; // TODO  Does this make more sense (with below as false) or leave the true return below?
             }
             return true;
         }
