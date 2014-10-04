@@ -1,6 +1,9 @@
 package com.keller23.android.aorb;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,21 +11,32 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.keller23.android.aorb.lib.OptionPicker;
+import com.keller23.android.aorb.lib.PropertiesHelper;
+import java.util.Properties;
 
 
 public class MainActivity extends Activity {
+
+    private Context context;
+    private PropertiesHelper versionProps;
+    private Properties props;
+    private PackageInfo pInfo;
+    private String versionName = "emptyVersion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /**
-         * FIXME Add OnClickListener for the checkboxes to enable the C/D EditBoxes.
-         *        In this OCL, we will listen for the check Mark, then enable the
-         *        corresponding TextEdit.
-         */
-
+        context = this;
+        versionProps = new PropertiesHelper(context);
+        versionProps.getProps("version.properties");
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        versionName = pInfo.versionName.toString();
         final CheckBox checkBoxC, checkBoxD;
         final EditText editTextA, editTextB, editTextC, editTextD;
 
@@ -80,7 +94,6 @@ public class MainActivity extends Activity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -99,7 +112,7 @@ public class MainActivity extends Activity {
             return true;
         }
         else if (id == R.id.action_version) { // TODO modify the version Toast to include the current version number. Then, modify it to bring up a custom 'About' toast/page.
-            Toast.makeText(getApplicationContext(),R.string.toast_WIP,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"A or B, v"+versionName,Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.action_generate) {
         // FIXME Fix the case where generation runs twice.
@@ -120,10 +133,16 @@ public class MainActivity extends Activity {
             // TODO Nest the oC and of if statements to require being selected as well as not empty/default.
             if (a.getText().toString().contentEquals(getString(R.string.editText_blank)) || a.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option A",Toast.LENGTH_SHORT).show();
             else if (b.getText().toString().contentEquals(getString(R.string.editText_blank)) || b.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option B",Toast.LENGTH_SHORT).show();
-            else if (c.isEnabled() && (c.getText().toString().isEmpty() || c.getText().toString().contentEquals(getString(R.string.editText_blank)))) Toast.makeText(getApplicationContext(),"Please enter Option C",Toast.LENGTH_SHORT).show();
-            else if (d.isEnabled() && (d.getText().toString().isEmpty() || d.getText().toString().contentEquals(getString(R.string.editText_blank)))) Toast.makeText(getApplicationContext(),"Please enter Option D",Toast.LENGTH_SHORT).show();
-            else { // FIXME If you select option D it will still generate regardless of oC being selected or oD being selected/not filled.
-
+            else if (c.isEnabled()) {
+                if (c.getText().toString().isEmpty() || c.getText().toString().contentEquals(getString(R.string.editText_blank)))
+                    Toast.makeText(getApplicationContext(), "Please enter Option C", Toast.LENGTH_SHORT).show();
+            }
+            else if (d.isEnabled()) {
+                if (d.getText().toString().isEmpty() || d.getText().toString().contentEquals(getString(R.string.editText_blank)))
+                    Toast.makeText(getApplicationContext(),"Please enter Option D",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                // FIXME If you select option D it will still generate regardless of oC being selected or oD being selected/not filled.
 
                 if (checkC.isChecked()) {
                     x += 1;
@@ -134,8 +153,8 @@ public class MainActivity extends Activity {
                     case 1:
                         result = a.getText().toString();
                         a.selectAll();
-                        //Thread.sleep(resultSleep); // FIXME Select answer, sleep/delay, then deselect and continue.
-                        Toast.makeText(getApplicationContext(), result + " is the result, duh. Obviously Testing...", Toast.LENGTH_LONG).show();
+                        //Thread.sleep(resultSleep); // FIXME Select answer, sleep/delay, then deselect and continue?
+                        //Toast.makeText(getApplicationContext(), result + " is the result, duh. Obviously Testing...", Toast.LENGTH_LONG).show();
                         break;
                     case 2:
                         result = b.getText().toString();
@@ -152,7 +171,7 @@ public class MainActivity extends Activity {
                     default:
                         result = R.string.toast_error + " in SWITCH";
                 }
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                 //result = null; // TODO Figure out if result = null is even necessary, let alone helpful.
                 //return true; // TODO  Does this ake more sense (with below as false) or leave the true return below?
             }
