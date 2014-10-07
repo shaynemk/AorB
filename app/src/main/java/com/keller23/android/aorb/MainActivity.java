@@ -12,20 +12,20 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.keller23.android.aorb.lib.OptionPicker;
-import com.keller23.android.aorb.lib.PropertiesHelper;
-import java.util.Properties;
 
 
 public class MainActivity extends Activity {
     // TODO Add GAnalytics [https://support.google.com/googleplay/android-developer/answer/3389759]
-    // TODO
 
-    private Context context;
-    private PropertiesHelper versionProps;
-    private Properties props;
+    private static Context context;
+    //private PropertiesHelper versionProps;
+    //private Properties props;
     private PackageInfo appInfo;
-    private String versionName = "emptyVersion";
-    private boolean debugMode;
+    //private String verName = "emptyVersion";
+
+    //public static final boolean debug = true;
+    final static int appFlags = context.getApplicationInfo().flags;
+    //final static boolean debug = (appFlags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 
 
     @Override
@@ -33,15 +33,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
-        versionProps = new PropertiesHelper(context);
-        versionProps.getProps("version.properties");
+        //versionProps = new PropertiesHelper(context);
+        //versionProps.getProps("version.properties");
         try {
             appInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        versionName = appInfo.versionName.toString();
-        //if (ApplicationInfo.FLAG_DEBUGGABLE) ; // TODO figure this debugging flag out?
+        //verName = appInfo.versionName;
+        debug("App ("+ appInfo.versionName +") is starting up...");
 
         final CheckBox checkBoxC, checkBoxD;
         final EditText editTextA, editTextB, editTextC, editTextD;
@@ -111,16 +111,18 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         if (id == R.id.action_settings) { // TODO Add settings activity and link it to the settings button.
             Toast.makeText(getApplicationContext(), R.string.toast_WIP,Toast.LENGTH_SHORT).show();
             return true;
         }
-        else if (id == R.id.action_version) { // TODO modify the version Toast to include the current version number. Then, modify it to bring up a custom 'About' toast/page.
-            Toast.makeText(getApplicationContext(),"A or B, v"+versionName,Toast.LENGTH_LONG).show();
+        else if (id == R.id.action_version) { // TODO Modify it to bring up a custom 'About' toast/page.
+            Toast.makeText(getApplicationContext(),"A or B, v"+ appInfo.versionName,Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.action_generate) {
-        // FIXME Fix the case where generation runs twice.
+            // FIXME Fix the case where generation runs twice.
+            // FIXME Move the option picking code to a separate class.
 
             OptionPicker gen = new OptionPicker();
             EditText a = (EditText) findViewById(R.id.editText_optionA),
@@ -131,8 +133,6 @@ public class MainActivity extends Activity {
                            checkD = (CheckBox) findViewById(R.id.checkBox_optionD);
             String result;
             int x = 2;
-            //long resultSleep = 5 * 1000;
-
 
 
             // TODO Dynamically add however many options we have to default/blank notification checker.
@@ -141,52 +141,62 @@ public class MainActivity extends Activity {
             if (a.getText().toString().contentEquals(getString(R.string.editText_blank)) || a.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option A",Toast.LENGTH_SHORT).show();
             else if (b.getText().toString().contentEquals(getString(R.string.editText_blank)) || b.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option B",Toast.LENGTH_SHORT).show();
             else if (c.isEnabled()) {
-                if (c.getText().toString().isEmpty() || c.getText().toString().contentEquals(getString(R.string.editText_blank)))
+                debug("C is enabled, checking content.");
+                if (c.getText().toString().contentEquals("") || c.getText().toString().contentEquals(getString(R.string.editText_blank)))
                     Toast.makeText(getApplicationContext(), "Please enter Option C", Toast.LENGTH_SHORT).show();
             }
             else if (d.isEnabled()) {
-                if (d.getText().toString().isEmpty() || d.getText().toString().contentEquals(getString(R.string.editText_blank)))
+                if (d.getText().toString().contentEquals("") || d.getText().toString().contentEquals(getString(R.string.editText_blank)))
                     Toast.makeText(getApplicationContext(),"Please enter Option D",Toast.LENGTH_SHORT).show();
             }
             else {
                 // FIXME If you select option D it will still generate regardless of oC being selected or oD being selected/not filled.
 
+
                 if (checkC.isChecked()) {
+                    debug("CheckBox C is checked.");
                     x += 1;
-                    if (checkD.isChecked()) x += 1;
+                    if (checkD.isChecked()) {
+                        debug("CheckBox D is checked.");
+                        x += 1;
+                    }
                 }
 
+                debug("Generating for ("+x+") options.");
                 switch (gen.choose(x)) {
                     case 1:
                         result = a.getText().toString();
-                        a.selectAll(); // FIXME EditText selection doesn't appear to be working anymore?
-                        //Thread.sleep(resultSleep); // FIXME Select answer, sleep/delay, then deselect and continue?
-                        Toast.makeText(getApplicationContext(), "Case 1", Toast.LENGTH_SHORT).show();
+                        a.selectAll();
+                        debug("Case 1 has been chosen.");
                         break;
                     case 2:
                         result = b.getText().toString();
                         b.selectAll();
-                        Toast.makeText(getApplicationContext(), "Case 2", Toast.LENGTH_SHORT).show();
+                        debug("Case 2 has been chosen.");
                         break;
                     case 3:
                         result = c.getText().toString();
                         c.selectAll();
-                        Toast.makeText(getApplicationContext(), "Case 3", Toast.LENGTH_SHORT).show();
+                        debug("Case 3 has been chosen.");
                         break;
                     case 4:
                         result = d.getText().toString();
                         d.selectAll();
-                        Toast.makeText(getApplicationContext(), "Case 4", Toast.LENGTH_SHORT).show();
+                        debug("Case 4 has been chosen.");
                         break;
                     default:
                         result = R.string.toast_error + " in SWITCH";
+                        debug("Switch has hit default case: ERROR.");
                 }
+                // TODO Change results display to a popup window that you have to accept answer to close.
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-                //result = null; // TODO Figure out if result = null is even necessary, let alone helpful.
-                //return true; // TODO  Does this make more sense (with below as false) or leave the true return below?
             }
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void debug(String debugString) {
+        /*if (debug)*/ Toast.makeText(context, R.string.debugMsg + debugString,Toast.LENGTH_SHORT).show();
     }
 }
