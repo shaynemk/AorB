@@ -11,6 +11,11 @@
         android:orderInCategory="101"
         android:showAsAction="never" />
 
+    <item android:id="@+id/action_log"
+        android:title="@string/action_log"
+        android:icon="@drawable/ic_action_paste"
+        android:showAsAction="never" />
+
     <item android:id="@+id/action_generate"
         android:title="@string/action_generate"
         android:icon="@drawable/ic_action_accept"
