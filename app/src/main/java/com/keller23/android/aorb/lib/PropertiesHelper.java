@@ -23,7 +23,7 @@ public class PropertiesHelper {
             props.load(iStream);
         } catch (IOException e) {
             // Log.e("PropertiesHelper",e.toString());
-            //Toast.makeText(context, R.string.toast_error + ": IOException thrown in PropertiesHelper.getProps()", Toast.LENGTH_LONG).show();
+            //Toast.makeText(contextMain, R.string.toast_error + ": IOException thrown in PropertiesHelper.getProps()", Toast.LENGTH_LONG).show();
         }
         return props;
     }
