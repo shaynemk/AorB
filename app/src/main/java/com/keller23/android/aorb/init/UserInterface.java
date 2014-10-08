@@ -3,11 +3,19 @@ package com.keller23.android.aorb.init;
 
 import android.view.View;
 import com.keller23.android.aorb.R;
+import com.keller23.android.aorb.lib.Debug;
 import com.keller23.android.aorb.lib.Refs;
 
-public class ClickListeners {
+public class UserInterface {
 
-    public static void init(){
+    public static void init() {
+        Debug.toast("Running UI.init()");
+        init_ClickListeners();
+    }
+
+    //public static void init
+
+    public static void init_ClickListeners(){
 
         Refs.editTextA.setOnClickListener(new View.OnClickListener() {
             @Override

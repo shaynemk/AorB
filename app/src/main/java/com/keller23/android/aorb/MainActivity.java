@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.keller23.android.aorb.init.ClickListeners;
+import com.keller23.android.aorb.init.UserInterface;
 import com.keller23.android.aorb.lib.Debug;
 import com.keller23.android.aorb.lib.OptionPicker;
 import com.keller23.android.aorb.lib.Refs;
@@ -22,8 +22,8 @@ public class MainActivity extends Activity {
         // init the Reference class
         Refs.init(this);
 
-        // init the ClickListeners
-        ClickListeners.init();
+        // init the UserInterface
+        UserInterface.init();
     }
 
     @Override
@@ -52,19 +52,12 @@ public class MainActivity extends Activity {
             // FIXME Move the option picking code to a separate class.
 
             OptionPicker gen = new OptionPicker();
-            /*EditText a = (EditText) findViewById(R.id.editText_optionA),
-                           b = (EditText) findViewById(R.id.editText_optionB),
-                           c = (EditText) findViewById(R.id.editText_optionC),
-                           d = (EditText) findViewById(R.id.editText_optionD);
-            CheckBox checkC = (CheckBox) findViewById(R.id.checkBox_optionC),
-                           checkD = (CheckBox) findViewById(R.id.checkBox_optionD);*/
             String result;
             int x = 2;
 
-
             // TODO Dynamically add however many options we have to default/blank notification checker.
             // FIXME Keep option d from running If c isn't enabled.
-            // TODO Nest the oC and of if statements to require being selected as well as not empty/default.
+            // TODO Nest the oC and oD if statements to require being selected as well as not empty/default.
             if (Refs.editTextA.getText().toString().contentEquals(getString(R.string.editText_blank)) || Refs.editTextA.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option A",Toast.LENGTH_SHORT).show();
             else if (Refs.editTextB.getText().toString().contentEquals(getString(R.string.editText_blank)) || Refs.editTextB.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),"Please enter Option B",Toast.LENGTH_SHORT).show();
             else if (Refs.editTextC.isEnabled()) {
@@ -78,7 +71,6 @@ public class MainActivity extends Activity {
             }
             else {
                 // FIXME If you select option D it will still generate regardless of oC being selected or oD being selected/not filled.
-
 
                 if (Refs.checkBoxC.isChecked()) {
                     Debug.toast("CheckBox C is checked.");
