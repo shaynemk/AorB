@@ -4,21 +4,20 @@
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_version"
-        android:title="Version"
-        android:orderInCategory="101"
-        android:showAsAction="never" />
+        android:title="@string/action_version"
+        android:orderInCategory="103"
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_log"
         android:title="@string/action_log"
-        android:icon="@drawable/ic_action_paste"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_generate"
         android:title="@string/action_generate"
         android:icon="@drawable/ic_action_accept"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="always" />
 
 </menu>

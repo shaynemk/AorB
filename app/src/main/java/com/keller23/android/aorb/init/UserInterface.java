@@ -10,12 +10,26 @@ public class UserInterface {
 
     public static void init() {
         Debug.toast("Running UI.init()");
-        init_ClickListeners();
+        ClickListeners();
+        UIElements();
     }
 
-    //public static void init
+    public static void UIElements() {
+        Refs.editTextC.setEnabled(Refs.checkBoxC.isChecked());
+        Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
 
-    public static void init_ClickListeners(){
+        // This is not necessary and rather redundant; however, this if block should
+        // prevent the following block of code from being included in a release build.
+        /*if (Refs.debug) {
+            Refs.menuItemLog.setEnabled(true);
+        }
+        else {
+            Refs.menuItemLog.setEnabled(false);
+        }*/
+    }
+
+    public static void ClickListeners(){
+        Debug.toast("Running ClickListeners()");
 
         Refs.editTextA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,8 +47,6 @@ public class UserInterface {
             }
         });
 
-        if (Refs.checkBoxC.isChecked()) Refs.editTextC.setEnabled(true);
-        else Refs.editTextC.setEnabled(false);
         Refs.editTextC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,13 +57,10 @@ public class UserInterface {
         Refs.checkBoxC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Refs.checkBoxC.isChecked()) Refs.editTextC.setEnabled(true);
-                else if (!Refs.checkBoxC.isChecked()) Refs.editTextC.setEnabled(false);
+                Refs.editTextC.setEnabled(Refs.checkBoxC.isChecked());
             }
         });
 
-        if (Refs.checkBoxD.isChecked()) Refs.editTextC.setEnabled(true);
-        else Refs.editTextD.setEnabled(false);
         Refs.editTextD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,9 +71,9 @@ public class UserInterface {
         Refs.checkBoxD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Refs.checkBoxD.isChecked()) Refs.editTextD.setEnabled(true);
-                else if (!Refs.checkBoxD.isChecked()) Refs.editTextD.setEnabled(false);
+                Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
             }
         });
+
     }
 }

@@ -10,4 +10,10 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
     }
+
+    public void test() throws Exception {
+        final int expected = 1;
+        final int actual = 5;
+        assertEquals(expected, actual);
+    }
 }
