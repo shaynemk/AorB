@@ -20,14 +20,14 @@ android {
         def version_Major = versionProps['VERSION_MAJOR'].toInteger();
         def version_Name = version_Major.toString() + "." + version_Minor.toString() + "-" + version_Build.toString()
 
-        versionProps['VERSION_BUILD']=version_Build.toString()
-        versionProps['VERSION_MINOR']=version_Minor.toString()
-        versionProps['VERSION_NAME']=version_Name
+        versionProps['VERSION_BUILD'] = version_Build.toString()
+        versionProps['VERSION_MINOR'] = version_Minor.toString()
+        versionProps['VERSION_NAME'] = version_Name
         versionProps.store(versionPropsFile.newWriter(), null)
 
         defaultConfig {
             applicationId "com.keller23.android.aorb"
-            minSdkVersion 15
+            minSdkVersion 16
             targetSdkVersion 20
             versionCode version_Build
             versionName version_Name
@@ -47,4 +47,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:20.0.0'
 }
