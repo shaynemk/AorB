@@ -9,11 +9,12 @@ import android.content.pm.PackageManager;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
 import com.keller23.android.aorb.R;
 
 
 public class Refs {
-    public static Activity activity;
+    public static Activity activityMain;
 
 
     public static boolean debug = false;
@@ -30,14 +31,14 @@ public class Refs {
 
     public static MenuItem menuItemLog;
 
-    public static String appName; /*= contextMain.getString(R.string.app_name);*/
+    public static String appName;
     public static String version;
     public static String versionDebug;
     public static String nameVersion;
     public static String nameVersionDebug;
 
     public static final String debugPrefix = "DEBUG: ";
-    public static final String debugWIP = "Work in Progress";
+    public static final String WIP = "Work in Progress";
     public static final String debugError = "ERROR: ";
     public static final String optionIncomplete = "Please fill all applicable boxes.";
     public static final String optionEnter = "Please enter Option ";
@@ -46,19 +47,19 @@ public class Refs {
 
     public static void init(Context _context, Activity _activity){
         Debug.toast("Initializing References");
-        activity = _activity;
+        activityMain = _activity;
         contextMain = _context;
         debug = (contextMain.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 
-        editTextA = (EditText) activity.findViewById(R.id.editText_optionA);
-        editTextB = (EditText) activity.findViewById(R.id.editText_optionB);
-        editTextC = (EditText) activity.findViewById(R.id.editText_optionC);
-        editTextD = (EditText) activity.findViewById(R.id.editText_optionD);
+        editTextA = (EditText) activityMain.findViewById(R.id.editText_optionA);
+        editTextB = (EditText) activityMain.findViewById(R.id.editText_optionB);
+        editTextC = (EditText) activityMain.findViewById(R.id.editText_optionC);
+        editTextD = (EditText) activityMain.findViewById(R.id.editText_optionD);
 
-        checkBoxC = (CheckBox) activity.findViewById(R.id.checkBox_optionC);
-        checkBoxD = (CheckBox) activity.findViewById(R.id.checkBox_optionD);
+        checkBoxC = (CheckBox) activityMain.findViewById(R.id.checkBox_optionC);
+        checkBoxD = (CheckBox) activityMain.findViewById(R.id.checkBox_optionD);
 
-        menuItemLog = (MenuItem) activity.findViewById(R.id.action_log);
+        menuItemLog = (MenuItem) activityMain.findViewById(R.id.action_log);
 
 
         try {
@@ -67,7 +68,7 @@ public class Refs {
             e.printStackTrace();
         }
 
-        appName = activity.getString(R.string.app_name);
+        appName = activityMain.getString(R.string.app_name);
         version = "v" + appInfo.versionName;
         versionDebug = version + "|DEBUG";
         nameVersion = appName + ", " + version;

@@ -2,6 +2,7 @@ package com.keller23.android.aorb.init;
 
 
 import android.view.View;
+
 import com.keller23.android.aorb.R;
 import com.keller23.android.aorb.lib.Debug;
 import com.keller23.android.aorb.lib.Refs;
@@ -18,14 +19,8 @@ public class UserInterface {
         Refs.editTextC.setEnabled(Refs.checkBoxC.isChecked());
         Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
 
-        // This is not necessary and rather redundant; however, this if block should
-        // prevent the following block of code from being included in a release build.
-        /*if (Refs.debug) {
-            Refs.menuItemLog.setEnabled(true);
-        }
-        else {
-            Refs.menuItemLog.setEnabled(false);
-        }*/
+        Refs.checkBoxC.setEnabled(Refs.debug);
+        Refs.checkBoxD.setEnabled(Refs.debug);
     }
 
     public static void ClickListeners(){

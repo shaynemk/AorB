@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.keller23.android.aorb.init.UserInterface;
 import com.keller23.android.aorb.lib.Debug;
+import com.keller23.android.aorb.lib.Info;
 import com.keller23.android.aorb.lib.OptionPicker;
 import com.keller23.android.aorb.lib.Refs;
 
@@ -37,7 +39,10 @@ public class MainActivity extends Activity {
         // FIXME Fix the attempt at disabling the CheckBox's and Debug Log if not in debug mode.
         //menu.findItem(R.id.checkBox_optionC).setVisible(!Refs.debug);
         //menu.findItem(R.id.checkBox_optionD).setVisible(!Refs.debug);
-        //menu.findItem(R.id.action_log).setEnabled(true);
+
+        Refs.menuItemLog = menu.findItem(R.id.action_log);
+        Refs.menuItemLog.setEnabled(Refs.debug);
+        Refs.menuItemLog.setVisible(Refs.debug);
 
         return true;
     }
@@ -50,7 +55,7 @@ public class MainActivity extends Activity {
 
         int id = item.getItemId();
         if (id == R.id.action_settings) { // TODO Add settings activity and link it to the settings button.
-            Debug.toast(Refs.debugWIP);
+           Info.toast(Refs.WIP);
             return true;
         }
         else if (id == R.id.action_version) { // TODO Move this to display on the settings page or something.
@@ -60,7 +65,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(Refs.contextMain,Refs.nameVersion,Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.action_log) { // TODO Create log activity and logging backend.
-            Debug.toast(Refs.debugWIP);
+            Info.toast(Refs.WIP);
         }
         else if (id == R.id.action_generate) {
             // FIXME Fix the case where generation runs twice.
