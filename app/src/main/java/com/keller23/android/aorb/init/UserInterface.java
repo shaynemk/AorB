@@ -19,8 +19,8 @@ public class UserInterface {
         Refs.editTextC.setEnabled(Refs.checkBoxC.isChecked());
         Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
 
-        Refs.checkBoxC.setEnabled(Refs.debug);
-        Refs.checkBoxD.setEnabled(Refs.debug);
+        //Refs.checkBoxC.setEnabled(Refs.debug);
+        //Refs.checkBoxD.setEnabled(Refs.debug);
     }
 
     public static void ClickListeners(){
