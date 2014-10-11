@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.keller23.android.aorb.init.UserInterface;
-import com.keller23.android.aorb.lib.Debug;
 import com.keller23.android.aorb.lib.Info;
 import com.keller23.android.aorb.lib.OptionPicker;
 import com.keller23.android.aorb.lib.Refs;
@@ -35,10 +34,6 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
-        // FIXME Fix the attempt at disabling the CheckBox's and Debug Log if not in debug mode.
-        //menu.findItem(R.id.checkBox_optionC).setVisible(!Refs.debug);
-        //menu.findItem(R.id.checkBox_optionD).setVisible(!Refs.debug);
 
         Refs.menuItemLog = menu.findItem(R.id.action_log);
         Refs.menuItemLog.setEnabled(Refs.debug);
@@ -68,6 +63,11 @@ public class MainActivity extends Activity {
             Info.toast(Refs.WIP);
         }
         else if (id == R.id.action_generate) {
+
+            OptionPicker pick = new OptionPicker();
+            pick.pickOption();
+
+            /*
             // FIXME Fix the case where generation runs twice.
             // FIXME Move the option picking code to a separate class.
 
@@ -79,16 +79,16 @@ public class MainActivity extends Activity {
             // FIXME Keep option d from running If c isn't enabled.
             // TODO Nest the oC and oD if statements to require being selected as well as not empty/default.
             // TODO Move the option picking logic to the OptionPicker class.
-            if (Refs.editTextA.getText().toString().contentEquals(getString(R.string.editText_blank)) || Refs.editTextA.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),Refs.optionEnter + "A",Toast.LENGTH_SHORT).show();
-            else if (Refs.editTextB.getText().toString().contentEquals(getString(R.string.editText_blank)) || Refs.editTextB.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),Refs.optionEnter + "B",Toast.LENGTH_SHORT).show();
+            if (Refs.editTextA.getText().toString().contentEquals(getString(R.string.editText_blank)) || Refs.editTextA.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),Refs.enterOption + "A",Toast.LENGTH_SHORT).show();
+            else if (Refs.editTextB.getText().toString().contentEquals(getString(R.string.editText_blank)) || Refs.editTextB.getText().toString().isEmpty()) Toast.makeText(getApplicationContext(),Refs.enterOption + "B",Toast.LENGTH_SHORT).show();
             else if (Refs.editTextC.isEnabled()) {
                 Debug.toast("C is enabled, checking content.");
                 if (Refs.editTextC.getText().toString().contentEquals("") || Refs.editTextC.getText().toString().contentEquals(getString(R.string.editText_blank)))
-                    Toast.makeText(getApplicationContext(), Refs.optionEnter + "C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Refs.enterOption + "C", Toast.LENGTH_SHORT).show();
             }
             else if (Refs.editTextD.isEnabled()) {
                 if (Refs.editTextD.getText().toString().contentEquals("") || Refs.editTextD.getText().toString().contentEquals(getString(R.string.editText_blank)))
-                    Toast.makeText(getApplicationContext(),Refs.optionEnter + "D",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),Refs.enterOption + "D",Toast.LENGTH_SHORT).show();
             }
             else {
                 // FIXME If you select option D it will still generate regardless of oC being selected or oD being selected/not filled.
@@ -130,7 +130,7 @@ public class MainActivity extends Activity {
                 }
                 // TODO Change results display to a popup window that you have to accept answer to close.
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-            }
+            }*/
             return true;
         }
         return super.onOptionsItemSelected(item);

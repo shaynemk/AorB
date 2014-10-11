@@ -41,7 +41,7 @@ public class Refs {
     public static final String WIP = "Work in Progress";
     public static final String debugError = "ERROR: ";
     public static final String optionIncomplete = "Please fill all applicable boxes.";
-    public static final String optionEnter = "Please enter Option ";
+    public static final String enterOption = "Please enter Option ";
 
     //public static versionProps = new PropertiesHelper(contextMain);
 
