@@ -41,6 +41,14 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+    /*
+     * TODO showDialog(int) is deprecated, have to use DialogFragment class with FragmentManager
+     * http://stackoverflow.com/questions/10285047/showdialog-deprecated-whats-the-alternative
+     */
+    /*public void onClick(View view) {
+        showDialog(10);
+    }*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

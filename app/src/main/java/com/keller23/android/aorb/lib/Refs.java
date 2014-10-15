@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
-
 import com.keller23.android.aorb.R;
 
 
@@ -20,6 +20,7 @@ public class Refs {
     public static boolean debug = false;
     public static Context contextMain;
     public static PackageInfo appInfo;
+    public static Bundle bundleMain;
 
     public static EditText editTextA;
     public static EditText editTextB;
@@ -45,10 +46,11 @@ public class Refs {
 
     //public static versionProps = new PropertiesHelper(contextMain);
 
-    public static void init(Context _context, Activity _activity){
+    public static void init(Context _context, Activity _activity, Bundle _bundle){
         Debug.toast("Initializing References");
         activityMain = _activity;
         contextMain = _context;
+        bundleMain =_bundle;
         debug = (contextMain.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 
         editTextA = (EditText) activityMain.findViewById(R.id.editText_optionA);
