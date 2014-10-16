@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
 import com.keller23.android.aorb.R;
 
 
@@ -31,6 +32,7 @@ public class Refs {
     public static CheckBox checkBoxD;
 
     public static MenuItem menuItemLog;
+    /*public static MenuItem menuItemSettings;*/
 
     public static String appName;
     public static String version;
@@ -40,7 +42,7 @@ public class Refs {
 
     public static final String debugPrefix = "DEBUG: ";
     public static final String WIP = "Work in Progress";
-    public static final String debugError = "ERROR: ";
+    public static final String errorPrefix = "ERROR: ";
     public static final String optionIncomplete = "Please fill all applicable boxes.";
     public static final String enterOption = "Please enter Option ";
 
@@ -61,7 +63,8 @@ public class Refs {
         checkBoxC = (CheckBox) activityMain.findViewById(R.id.checkBox_optionC);
         checkBoxD = (CheckBox) activityMain.findViewById(R.id.checkBox_optionD);
 
-        menuItemLog = (MenuItem) activityMain.findViewById(R.id.action_log);
+        /*menuItemLog = (MenuItem) activityMain.findViewById(R.id.action_log);*/
+        /*menuItemSettings = (MenuItem) activityMain.findViewById(R.id.action_settings);*/
 
 
         try {

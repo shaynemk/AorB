@@ -1,6 +1,7 @@
 package com.keller23.android.aorb.lib;
 
 import com.keller23.android.aorb.R;
+
 import java.util.Date;
 import java.util.Random;
 
@@ -85,7 +86,7 @@ public class OptionPicker {
                      Debug.toast("Case 4 has been chosen.");
                      break;
                  default:
-                     result = Refs.debugError + " in SWITCH";
+                     result = Refs.errorPrefix + " in SWITCH";
                      Debug.toast("Switch has hit default case: ERROR.");
              }
              Info.toast(result);

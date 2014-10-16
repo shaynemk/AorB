@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
+
 import com.keller23.android.aorb.init.UserInterface;
 import com.keller23.android.aorb.lib.Debug;
 import com.keller23.android.aorb.lib.Info;
@@ -53,8 +53,8 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_settings) { // TODO Learn how to hook the SettingsActivity.java in this.
             Debug.toast("Clicked on Settings");
-            //Info.toast(Refs.WIP);
-            //runSettingsActivity();
+            if (Refs.debug) runSettings();
+            else Info.toast(Refs.WIP);
             return true;
         }
         else if (id == R.id.action_version) { // TODO Move this to display on the settings page or something.
@@ -64,7 +64,9 @@ public class MainActivity extends Activity {
                 Toast.makeText(Refs.contextMain,Refs.nameVersion,Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.action_log) { // TODO Create log activity and logging backend.
-            Info.toast(Refs.WIP);
+            Debug.toast("Clicked on Log");
+            if (Refs.debug) runLog();
+            else Info.toast(Refs.WIP);
         }
         else if (id == R.id.action_generate) {
 
@@ -75,15 +77,29 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // This should be auto hooked from android:onClick in the main.xml menu
-    public void runSettingsActivity(View v) {
-        Debug.toast("Inside runSettingsActivity()");
+    /*called when user clicks on settings menu button*/
+    public void runSettings() {
+        Debug.toast("Inside runSettings()");
         // Copied from http://developer.android.com/training/basics/firstapp/starting-activity.html
         Intent intent = new Intent(this, SettingsActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
+
         Debug.toast("Starting Settings Activity");
+        startActivity(intent);
+    }
+
+    /*called when user clicks on settings menu button*/
+    public void runLog() {
+        Debug.toast("Inside runLog()");
+        // Copied from http://developer.android.com/training/basics/firstapp/starting-activity.html
+        Intent intent = new Intent(this, Log.class);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+
+        Debug.toast("Starting Log Activity");
         startActivity(intent);
     }
 }

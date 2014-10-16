@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
+
 import java.util.List;
 
 //import android.support.v4.app.NavUtils;
@@ -41,14 +42,6 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
-    /*
-     * TODO showDialog(int) is deprecated, have to use DialogFragment class with FragmentManager
-     * http://stackoverflow.com/questions/10285047/showdialog-deprecated-whats-the-alternative
-     */
-    /*public void onClick(View view) {
-        showDialog(10);
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +53,10 @@ public class SettingsActivity extends PreferenceActivity {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {*/
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        /*}*/
     }
 
     @Override
