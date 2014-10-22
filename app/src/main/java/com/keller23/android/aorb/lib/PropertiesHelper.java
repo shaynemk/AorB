@@ -11,18 +11,18 @@ public class PropertiesHelper {
     private Context context;
     private Properties props;
 
-    public PropertiesHelper (Context context) {
+    public PropertiesHelper(Context context) {
         this.context = context;
         props = new Properties();
     }
 
-    public Properties getProps (String file) {
+    public Properties getProps(String file) {
         try {
             AssetManager assetMgr = context.getAssets();
             InputStream iStream = assetMgr.open(file);
             props.load(iStream);
         } catch (IOException e) {
-            // Log.e("PropertiesHelper",e.toString());
+            // LogActivity.e("PropertiesHelper",e.toString());
             //Toast.makeText(contextMain, R.string.toast_error + ": IOException thrown in PropertiesHelper.getProps()", Toast.LENGTH_LONG).show();
         }
         return props;

@@ -1,83 +1,52 @@
 package com.keller23.android.aorb.lib;
 
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.keller23.android.aorb.R;
 
+public class Refs extends com.keller23.android.common.libs.Refs {
 
-public class Refs {
-    public static Activity activityMain;
-
-
-    public static boolean debug = false;
-    public static Context contextMain;
-    public static PackageInfo appInfo;
-    public static Bundle bundleMain;
-
+    public static final String enterOption = "Please enter Option ";
+    public static Activity activityLog;
+    public static Bundle bundleLog;
+    public static Context contextLog;
+    public static Button buttonClearLog;
+    public static CheckBox checkBoxC;
+    public static CheckBox checkBoxD;
     public static EditText editTextA;
     public static EditText editTextB;
     public static EditText editTextC;
     public static EditText editTextD;
-
-    public static CheckBox checkBoxC;
-    public static CheckBox checkBoxD;
-
     public static MenuItem menuItemLog;
-    /*public static MenuItem menuItemSettings;*/
-
-    public static String appName;
-    public static String version;
-    public static String versionDebug;
-    public static String nameVersion;
-    public static String nameVersionDebug;
-
-    public static final String debugPrefix = "DEBUG: ";
-    public static final String WIP = "Work in Progress";
-    public static final String errorPrefix = "ERROR: ";
-    public static final String optionIncomplete = "Please fill all applicable boxes.";
-    public static final String enterOption = "Please enter Option ";
+    public static TextView textViewLogAppInfo;
+    public static TextView textViewLog;
 
     //public static versionProps = new PropertiesHelper(contextMain);
 
-    public static void init(Context _context, Activity _activity, Bundle _bundle){
-        Debug.toast("Initializing References");
-        activityMain = _activity;
-        contextMain = _context;
-        bundleMain =_bundle;
-        debug = (contextMain.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-
+    public static void initMain() {
+        Debug.toast("Initializing App Main Refs.");
         editTextA = (EditText) activityMain.findViewById(R.id.editText_optionA);
         editTextB = (EditText) activityMain.findViewById(R.id.editText_optionB);
         editTextC = (EditText) activityMain.findViewById(R.id.editText_optionC);
         editTextD = (EditText) activityMain.findViewById(R.id.editText_optionD);
-
         checkBoxC = (CheckBox) activityMain.findViewById(R.id.checkBox_optionC);
         checkBoxD = (CheckBox) activityMain.findViewById(R.id.checkBox_optionD);
+    }
 
-        /*menuItemLog = (MenuItem) activityMain.findViewById(R.id.action_log);*/
-        /*menuItemSettings = (MenuItem) activityMain.findViewById(R.id.action_settings);*/
-
-
-        try {
-            Refs.appInfo = contextMain.getPackageManager().getPackageInfo(contextMain.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        appName = activityMain.getString(R.string.app_name);
-        version = "v" + appInfo.versionName;
-        versionDebug = version + "|DEBUG";
-        nameVersion = appName + ", " + version;
-        nameVersionDebug = appName + ", " + versionDebug;
+    public static void initLog(Context _context, Activity _activity, Bundle _bundle) {
+        Debug.toast("Initializing App Log Refs.");
+        contextLog = _context;
+        activityLog = _activity;
+        bundleLog = _bundle;
+        textViewLogAppInfo = (TextView) activityLog.findViewById(R.id.textView_LogAppInfo);
+        textViewLog = (TextView) activityLog.findViewById(R.id.textView_Log);
     }
 
     /*public Refs(Activity _act){

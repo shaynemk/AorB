@@ -1,11 +1,10 @@
 package com.keller23.android.aorb.init;
 
-
 import android.view.View;
 
 import com.keller23.android.aorb.R;
-import com.keller23.android.aorb.lib.Debug;
 import com.keller23.android.aorb.lib.Refs;
+import com.keller23.android.common.utils.Debug;
 
 public class UserInterface {
 
@@ -18,6 +17,8 @@ public class UserInterface {
     public static void UIElements() {
         Refs.editTextC.setEnabled(Refs.checkBoxC.isChecked());
         Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
+
+
 
         //Refs.checkBoxC.setEnabled(Refs.debug);
         //Refs.checkBoxD.setEnabled(Refs.debug);

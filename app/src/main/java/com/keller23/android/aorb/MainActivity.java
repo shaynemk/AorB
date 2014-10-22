@@ -23,13 +23,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main); // TODO Use this to change to our settings activity?
 
         // init the References
-        Refs.init(getApplicationContext(), this, savedInstanceState);
+        Refs.init(getApplicationContext(), this, savedInstanceState, getString(R.string.app_name));
+        Refs.initMain();
 
         // init the UserInterface
         UserInterface.init();
 
         // one last init
         //Refs.menuItem_debugLog = (MenuItem) findViewById(R.id.action_log);
+
+        // log testing. not ready yet.
+        /*Debug.log(Refs.textViewLog, "App finished loading.");*/
     }
 
     @Override
@@ -41,7 +45,7 @@ public class MainActivity extends Activity {
         Refs.menuItemLog.setEnabled(Refs.debug);
         Refs.menuItemLog.setVisible(Refs.debug);
 
-        return true;
+    return true;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         int id = item.getItemId();
-        if (id == R.id.action_settings) { // TODO Learn how to hook the SettingsActivity.java in this.
+        if (id == R.id.action_settings) {
             Debug.toast("Clicked on Settings");
             if (Refs.debug) runSettings();
             else Info.toast(Refs.WIP);
@@ -59,9 +63,9 @@ public class MainActivity extends Activity {
         }
         else if (id == R.id.action_version) { // TODO Move this to display on the settings page or something.
             if (Refs.debug)
-                Toast.makeText(Refs.contextMain,Refs.nameVersionDebug,Toast.LENGTH_LONG).show();
+                Toast.makeText(Refs.contextMain,Refs.appNameVersionDebug,Toast.LENGTH_LONG).show();
             else
-                Toast.makeText(Refs.contextMain,Refs.nameVersion,Toast.LENGTH_LONG).show();
+                Toast.makeText(Refs.contextMain,Refs.appNameVersion,Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.action_log) { // TODO Create log activity and logging backend.
             Debug.toast("Clicked on Log");
@@ -92,9 +96,9 @@ public class MainActivity extends Activity {
 
     /*called when user clicks on settings menu button*/
     public void runLog() {
-        Debug.toast("Inside runLog()");
+        //Debug.toast("Inside runLog()");
         // Copied from http://developer.android.com/training/basics/firstapp/starting-activity.html
-        Intent intent = new Intent(this, Log.class);
+        Intent intent = new Intent(this, LogActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);

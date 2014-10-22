@@ -3,6 +3,10 @@
     package="com.keller23.android.aorb"
     android:versionCode="" >
 
+    <!-- Internet and Access_Network_State are for Analytics.-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -26,7 +30,7 @@
                 android:value="com.keller23.android.aorb.MainActivity" />
         </activity>
         <activity
-            android:name=".Log"
+            android:name=".LogActivity"
             android:label="@string/title_activity_log"
             android:parentActivityName=".MainActivity" >
             <meta-data
