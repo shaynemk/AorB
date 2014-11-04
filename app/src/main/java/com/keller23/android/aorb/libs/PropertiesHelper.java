@@ -1,4 +1,4 @@
-package com.keller23.android.aorb.lib;
+package com.keller23.android.aorb.libs;
 
 import android.content.Context;
 import android.content.res.AssetManager;

@@ -8,10 +8,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.keller23.android.aorb.init.UserInterface;
-import com.keller23.android.aorb.lib.Debug;
-import com.keller23.android.aorb.lib.Info;
-import com.keller23.android.aorb.lib.OptionPicker;
-import com.keller23.android.aorb.lib.Refs;
+import com.keller23.android.aorb.libs.Info;
+import com.keller23.android.aorb.libs.OptionPicker;
+import com.keller23.android.aorb.libs.Refs;
+import com.keller23.android.common.log.Log;
 
 
 public class MainActivity extends Activity {
@@ -21,18 +21,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // TODO Use this to change to our settings activity?
+        Refs.activityCurrent = this;
+        Refs.contextCurrent = getApplicationContext();
 
-        // init the References
+        // mainInit the References
         Refs.init(getApplicationContext(), this, savedInstanceState, getString(R.string.app_name));
         Refs.initMain();
 
-        // init the UserInterface
-        UserInterface.init();
+        // mainInit the UserInterface
+        UserInterface.mainInit();
 
-        // one last init
+        // one last mainInit
         //Refs.menuItem_debugLog = (MenuItem) findViewById(R.id.action_log);
 
         // log testing. not ready yet.
+        Log.d("App finished loading.");
         /*Debug.log(Refs.textViewLog, "App finished loading.");*/
     }
 
@@ -56,7 +59,8 @@ public class MainActivity extends Activity {
 
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Debug.toast("Clicked on Settings");
+            Log.d("Clicked on Settings.");
+            /*Debug.toast("Clicked on Settings");*/
             if (Refs.debug) runSettings();
             else Info.toast(Refs.WIP);
             return true;
@@ -68,7 +72,8 @@ public class MainActivity extends Activity {
                 Toast.makeText(Refs.contextMain,Refs.appNameVersion,Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.action_log) { // TODO Create log activity and logging backend.
-            Debug.toast("Clicked on Log");
+            Log.d("Clicked on Log.");
+            /*Debug.toast("Clicked on Log");*/
             if (Refs.debug) runLog();
             else Info.toast(Refs.WIP);
         }
@@ -83,14 +88,16 @@ public class MainActivity extends Activity {
 
     /*called when user clicks on settings menu button*/
     public void runSettings() {
-        Debug.toast("Inside runSettings()");
+        Log.d("Inside runSettings().");
+        /*Debug.toast("Inside runSettings()");*/
         // Copied from http://developer.android.com/training/basics/firstapp/starting-activity.html
         Intent intent = new Intent(this, SettingsActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
 
-        Debug.toast("Starting Settings Activity");
+        Log.d("Starting Settings Activity.");
+        /*Debug.toast("Starting Settings Activity");*/
         startActivity(intent);
     }
 
@@ -103,7 +110,8 @@ public class MainActivity extends Activity {
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
 
-        Debug.toast("Starting Log Activity");
+        Log.d("Starting Log Activity.");
+        /*Debug.toast("Starting Log Activity");*/
         startActivity(intent);
     }
 }

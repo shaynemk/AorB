@@ -15,6 +15,9 @@ public class Refs {
     public static Bundle bundleMain;
     public static Context contextMain;
 
+    public static Activity activityCurrent;
+    public static Context contextCurrent;
+
     public static boolean debug = false;
     public static PackageInfo appInfo;
 
@@ -24,6 +27,9 @@ public class Refs {
     public static String versionDebug;
     public static String appNameVersion;
     public static String appNameVersionDebug;
+
+    public static String logContent = "";
+
     public static final String debugPrefix = "DEBUG: ";
     public static final String WIP = "Work in Progress";
     public static final String errorPrefix = "ERROR: ";

@@ -3,29 +3,33 @@ package com.keller23.android.aorb.init;
 import android.view.View;
 
 import com.keller23.android.aorb.R;
-import com.keller23.android.aorb.lib.Refs;
-import com.keller23.android.common.utils.Debug;
+import com.keller23.android.aorb.libs.Refs;
+import com.keller23.android.common.log.Log;
 
 public class UserInterface {
 
-    public static void init() {
-        Debug.toast("Running UI.init()");
-        ClickListeners();
-        UIElements();
+    public static void mainInit() {
+        Log.d("Running UI.mainInit()");
+        /*Debug.toast("Running UI.mainInit()");*/
+        mainClickListeners();
+        MainUIElements();
     }
 
-    public static void UIElements() {
+    public static void logInit() {
+        logClickListeners();
+    }
+
+    private static void MainUIElements() {
         Refs.editTextC.setEnabled(Refs.checkBoxC.isChecked());
         Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
-
-
 
         //Refs.checkBoxC.setEnabled(Refs.debug);
         //Refs.checkBoxD.setEnabled(Refs.debug);
     }
 
-    public static void ClickListeners(){
-        Debug.toast("Running ClickListeners()");
+    private static void mainClickListeners(){
+        Log.d("Running mainClickListeners()");
+        /*Debug.toast("Running mainClickListeners()");*/
 
         Refs.editTextA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +74,18 @@ public class UserInterface {
                 Refs.editTextD.setEnabled(Refs.checkBoxD.isChecked());
             }
         });
+    }
 
+    private static void logClickListeners() {
+        Log.d("Running logClickListeners()");
+        /*Debug.toast("Running logClickListeners()");*/
+
+        Refs.buttonClearLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Refs.logContent = "";
+                Refs.textViewLog.setText(Refs.logContent);
+            }
+        });
     }
 }

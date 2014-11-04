@@ -1,8 +1,9 @@
-package com.keller23.android.aorb.lib;
+package com.keller23.android.aorb.libs;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.keller23.android.aorb.R;
+import com.keller23.android.common.log.Log;
 
 public class Refs extends com.keller23.android.common.libs.Refs {
 
@@ -31,7 +33,8 @@ public class Refs extends com.keller23.android.common.libs.Refs {
     //public static versionProps = new PropertiesHelper(contextMain);
 
     public static void initMain() {
-        Debug.toast("Initializing App Main Refs.");
+        Log.d("Initializing App Main Refs.");
+        /*Debug.toast("Initializing App Main Refs.");*/
         editTextA = (EditText) activityMain.findViewById(R.id.editText_optionA);
         editTextB = (EditText) activityMain.findViewById(R.id.editText_optionB);
         editTextC = (EditText) activityMain.findViewById(R.id.editText_optionC);
@@ -41,12 +44,16 @@ public class Refs extends com.keller23.android.common.libs.Refs {
     }
 
     public static void initLog(Context _context, Activity _activity, Bundle _bundle) {
-        Debug.toast("Initializing App Log Refs.");
+        Log.d("Initializing App Log Refs.");
+        /*Debug.toast("Initializing App Log Refs.");*/
         contextLog = _context;
         activityLog = _activity;
         bundleLog = _bundle;
         textViewLogAppInfo = (TextView) activityLog.findViewById(R.id.textView_LogAppInfo);
         textViewLog = (TextView) activityLog.findViewById(R.id.textView_Log);
+        buttonClearLog = (Button) activityLog.findViewById(R.id.buttonClearLog);
+
+        textViewLog.setText(Html.fromHtml(logContent));
     }
 
     /*public Refs(Activity _act){

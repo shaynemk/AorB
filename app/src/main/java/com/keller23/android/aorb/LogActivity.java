@@ -2,12 +2,14 @@ package com.keller23.android.aorb;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.keller23.android.aorb.lib.Refs;
-import com.keller23.android.common.utils.Debug;
+import com.keller23.android.aorb.init.UserInterface;
+import com.keller23.android.aorb.libs.Refs;
+import com.keller23.android.common.log.Log;
 
 
 public class LogActivity extends Activity {
@@ -16,10 +18,16 @@ public class LogActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+        Refs.activityCurrent = this;
+        Refs.contextCurrent = getApplicationContext();
 
-        Debug.toast("In LogActivity's onCreate()");
+        Log.d("In LogActivity's onCreate()");
+        /*Debug.toast("In LogActivity's onCreate()");*/
 
         Refs.initLog(getApplicationContext(), this, savedInstanceState);
+        UserInterface.logInit();
+
+        if (com.keller23.android.common.libs.Refs.activityCurrent.getClass().getSimpleName().equals(".LogActivity")) Refs.textViewLog.setText(Html.fromHtml(Refs.logContent));
 
         if (Refs.debug) Refs.textViewLogAppInfo.setText(Refs.appNameVersionDebug);
         else Refs.textViewLogAppInfo.setText(Refs.appNameVersion);

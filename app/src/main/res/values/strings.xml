@@ -14,6 +14,7 @@
     <string name="toast_WIP">Work in Progress</string>
     <string name="toast_optionError">Please fill all applicable boxes.</string>
     <string name="title_activity_log">Log</string>
-    <string name="log_defaultText">This is an empty log box.</string>
+    <string name="log_defaultText">This text should not ever be in the log window.</string>
+    <string name="buttonClearLog">Clear</string>
 
 </resources>
