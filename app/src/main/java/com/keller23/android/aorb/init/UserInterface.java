@@ -2,6 +2,7 @@ package com.keller23.android.aorb.init;
 
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
 import com.keller23.android.aorb.R;
 import com.keller23.android.aorb.libs.Refs;
 import com.keller23.android.common.log.Log;
@@ -85,6 +86,14 @@ public class UserInterface {
             public void onClick(View v) {
                 Refs.logContent = "";
                 Refs.textViewLog.setText(Refs.logContent);
+            }
+        });
+
+        Refs.buttonCrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Crashlytics.setBool("forced_crash", true);
+                throw new RuntimeException("This is a forced crash.");
             }
         });
     }

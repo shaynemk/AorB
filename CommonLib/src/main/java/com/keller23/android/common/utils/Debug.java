@@ -16,10 +16,10 @@ public class Debug {
         if (Refs.debug) Toast.makeText(Refs.contextMain, Refs.debugPrefix + debugMsg, Toast.LENGTH_SHORT).show();
     }
 
-    public static void log(TextView textViewLog, String logMSG) {
+    /*public static void log(TextView textViewLog, String logMSG) {
         if (Refs.debug){
             final String strLog = textViewLog.getText().toString() + "\n";
             textViewLog.setText(strLog + date.getTime() + Refs.debugPrefix + logMSG);
         }
-    }
+    }*/
 }

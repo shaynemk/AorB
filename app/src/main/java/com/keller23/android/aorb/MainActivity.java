@@ -7,11 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.keller23.android.aorb.init.UserInterface;
 import com.keller23.android.aorb.libs.Info;
 import com.keller23.android.aorb.libs.OptionPicker;
 import com.keller23.android.aorb.libs.Refs;
 import com.keller23.android.common.log.Log;
+
+import io.fabric.sdk.android.Fabric;
 
 
 public class MainActivity extends Activity {
@@ -20,7 +23,16 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // TODO Use this to change to our settings activity?
+
+        /*Fabric.with(this, new Crashlytics());*/
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
+        Crashlytics.setBool("forced_crash", false);;
+
+        setContentView(R.layout.activity_main);
         Refs.activityCurrent = this;
         Refs.contextCurrent = getApplicationContext();
 

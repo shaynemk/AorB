@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <!-- Option A -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_optionA"
+        android:id="@+id/label_optionA"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:id="@+id/editText_optionA"
+        android:layout_below="@+id/label_optionA"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/optionDist"
+        android:text="@string/editText_blank"
+        android:inputType="text" />
+
+    <!-- Option B -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_optionB"
+        android:id="@+id/label_optionB"
+        android:layout_marginTop="@dimen/labelDist"
+        android:layout_below="@+id/editText_optionA"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_optionB"
+        android:layout_below="@+id/label_optionB"
+        android:layout_marginTop="@dimen/optionDist"
+        android:layout_centerHorizontal="true"
+        android:text="@string/editText_blank"
+        android:inputType="text" />
+
+    <!-- Option C -->
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_optionC"
+        android:id="@+id/checkBox_optionC"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/label_optionB"
+        android:layout_marginTop="@dimen/labelDist" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_optionC"
+        android:layout_below="@+id/checkBox_optionC"
+        android:layout_marginTop="@dimen/optionDist"
+        android:layout_centerHorizontal="true"
+        android:text="@string/editText_blank"
+        android:inputType="text" />
+
+    <!-- Option D -->
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_optionD"
+        android:id="@+id/checkBox_optionD"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/checkBox_optionC"
+        android:layout_marginTop="@dimen/labelDist" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_optionD"
+        android:layout_below="@+id/checkBox_optionD"
+        android:layout_marginTop="@dimen/optionDist"
+        android:layout_centerHorizontal="true"
+        android:text="@string/editText_blank"
+        android:inputType="text" />
+
+</RelativeLayout>

@@ -16,5 +16,6 @@
     <string name="title_activity_log">Log</string>
     <string name="log_defaultText">This text should not ever be in the log window.</string>
     <string name="buttonClearLog">Clear</string>
+    <string name="buttonCrash">Crash</string>
 
 </resources>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.keller23.android.aorb"
-    android:versionCode="" >
+    package="com.keller23.android.aorb">
+    <!-- android:versionCode=""  this was erroring out, and seemingly unused. -->
 
     <!-- Internet and Access_Network_State are for Analytics.-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--<uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
 
     <application
         android:allowBackup="true"
@@ -37,6 +37,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.keller23.android.aorb.MainActivity" />
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4cdad90d53f4d77caec0c4c4226aaaefbe901458" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
