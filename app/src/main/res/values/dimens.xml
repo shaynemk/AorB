@@ -6,5 +6,13 @@
     <dimen name="labelDist">105dp</dimen>
     <dimen name="optionDist">20dp</dimen>
 
+    <dimen name="leftColumn">50dp</dimen>
+    <dimen name="leftColumnMarginLS">67dp</dimen>
+    <dimen name="leftColumnMarginRE">48dp</dimen>
+    <dimen name="leftColumnMarginTV">56dp</dimen>
+
+    <dimen name="Row1MarginTop">30dp</dimen>
+    <dimen name="labelPadding">15dp</dimen>
+
 
 </resources>
